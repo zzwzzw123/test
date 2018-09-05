@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			ul,li {
+				list-style-type: none;
+			}
+			
+			ul {
+				width: 240px;
+				height: 240px;
+				margin: 0 auto;
+			}
+			
+			img {
+				display: block;
+				float: left;
+				cursor: pointer;
+			}
+			
+			#start {
+				display: block;
+				width: 240px;
+				height: 40px;
+				margin: 0 auto;
+				margin-top: 60px;
+				font-size: 24px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			$('body').append('<ul></ul>');
+			
+			$('ul').append('<li></li>');
+			
+			for(var i = 0;i <= 35;i ++) {
+
+				$('li').append('<img src="img0.gif"/>');
+			}
+			
+		</script>
+		
+		<input type="button" value="点击开始" id="start"/>
+		
+		<script type="text/javascript">
+		
+			$(function() {
+				
+				//设置图片坐标
+				var map = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,
+						11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18];
+				
+				//两个图片单击变量
+				var click1,click2;
+				
+				//按钮单击事件，游戏开始
+				$('#start').click(function() {
+					
+					//游戏开始禁用按钮
+					$('#start').prop('disabled',true);
+					
+					//游戏开始，按钮文字变换
+					$('#start').val('游戏进行中');
+					
+					//按钮颜色变换
+					$('#start').css('color','#666666');
+					
+					//图片清空，初始化
+					$('img').attr('src','img0.gif');
+					
+					//图片顺序重新排列
+					for (var i = 0;i <= 35;i ++) {
+						
+						//生成随机数
+						var r = parseInt( 36 * Math.random() );
+						
+						//坐标数组中数据乱序
+						var temp = map[r];
+						map[r] = map[i];
+						map[i] = temp;
+					}
+					
+					//获得图片对象
+					var img = document.getElementsByTagName('img');
+					
+					for (var j = 0;j < img.length;j ++) {
+						
+						//单击图片事件
+						img[j].onclick = function(j) {
+							
+							//图片改变
+							//img[j].src = 'img' + map[r] + '.gif';
+							$('img:eq(j)').attr('src','img' + map[r] + '.gif');
+							
+						};
+					}
+						
+							
+						
+					
+					
+				});
+				
+				
+				
+			});
+		</script>
+	</body>
+</html>
